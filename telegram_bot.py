@@ -37,7 +37,7 @@ def answer_to_user(update: Update, context: CallbackContext):
     """Answer to user with DialogFlow responce"""
     try:
         update.message.reply_text(detect_intent_text(
-            update.message.chat_id, update.message.text
+            f'tg-{update.message.chat_id}', update.message.text
         ))
     except Exception as error:
         print(f'Problems with DiagFlow: {error}')
