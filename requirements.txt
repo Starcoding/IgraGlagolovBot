@@ -1,0 +1,5 @@
+vk-api==11.9.6
+dialogflow==1.1.1
+python-telegram-bot==13.8.1
+google-cloud==0.34.0
+python-dotenv==0.19.1
