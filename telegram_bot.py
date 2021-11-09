@@ -1,4 +1,5 @@
 import os
+import logging
 from dialogflow_v2 import SessionsClient
 from dialogflow_v2.types import TextInput, QueryInput
 from telegram import Update
