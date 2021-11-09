@@ -1,36 +1,21 @@
 import os
-
-from telegram import Update, ForceReply
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-
-def start(update: Update, context: CallbackContext):
-    """Send a message when the command /start is issued."""
-    user = update.effective_user
-    update.message.reply_markdown_v2(
-        fr'Здравствуйте, {user.mention_markdown_v2()}\!',
-        # reply_markup=ForceReply(selective=True),
-    )
-
-
-def help_command(update: Update, context: CallbackContext):
-    """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
-
-
-def echo(update: Update, context: CallbackContext):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
+import vk_api
+from vk_api.longpoll import VkLongPoll, VkEventType
 
 
 def main():
-    """Start the bot."""
-    updater = Updater(os.environ['TELEGRAM_TOKEN'])
-    dispatcher = updater.dispatcher
-    dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("help", help_command))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
-    updater.start_polling()
-    updater.idle()
+    vk_session = vk_api.VkApi(token=os.environ['VK_API_KEY'])
+
+    longpoll = VkLongPoll(vk_session)
+
+    for event in longpoll.listen():
+        if event.type == VkEventType.MESSAGE_NEW:
+            print('Новое сообщение:')
+            if event.to_me:
+                print('Для меня от: ', event.user_id)
+            else:
+                print('От меня для: ', event.user_id)
+            print('Текст:', event.text)
 
 
 if __name__ == '__main__':
