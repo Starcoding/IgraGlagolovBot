@@ -36,11 +36,16 @@ def create_intent(project_id, display_name,
     print("Intent created: {}".format(response))
 
 
-with open('training_phrases.json', encoding='utf-8') as json_file:
-    training_phrases = json.load(json_file)
+def main():
+    with open('training_phrases.json', encoding='utf-8') as json_file:
+        training_phrases = json.load(json_file)
 
-for phrase in training_phrases:
-    create_intent(project_id=os.environ['PROJECT_ID'],
-                  display_name=phrase,
-                  training_phrases_parts=training_phrases[phrase]['questions'],
-                  message_texts=[training_phrases[phrase]['answer']])
+    for phrase in training_phrases:
+        create_intent(project_id=os.environ['PROJECT_ID'],
+                    display_name=phrase,
+                    training_phrases_parts=training_phrases[phrase]['questions'],
+                    message_texts=[training_phrases[phrase]['answer']])
+
+
+if __name__ == '__main__':
+    main()

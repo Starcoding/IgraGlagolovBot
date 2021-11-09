@@ -8,7 +8,6 @@ load_dotenv()
 
 
 def detect_intent_text(session_id, text, platform='other'):
-    0/0
     session_client = SessionsClient()
     session = session_client.session_path(os.environ['PROJECT_ID'], session_id)
     text_input = TextInput(text=text, language_code='ru')

@@ -34,11 +34,16 @@ def error_handler(update: Update, context: CallbackContext):
     print(f'Update: {update}.\nError: {context.error}.')
 
 
-updater = Updater(os.environ['TELEGRAM_TOKEN'])
-dispatcher = updater.dispatcher
-dispatcher.add_handler(CommandHandler("start", start))
-dispatcher.add_handler(CommandHandler("help", help_command))
-dispatcher.add_error_handler(error_handler)
-dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, answer_to_user))
-updater.start_polling()
-updater.idle()
+def main():
+    updater = Updater(os.environ['TELEGRAM_TOKEN'])
+    dispatcher = updater.dispatcher
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("help", help_command))
+    dispatcher.add_error_handler(error_handler)
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, answer_to_user))
+    updater.start_polling()
+    updater.idle()
+
+
+if __name__ == '__main__':
+    main()
