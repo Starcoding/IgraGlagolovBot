@@ -23,7 +23,7 @@ def detect_intent_text(session_id, text):
         return False
 
 
-def echo(event, vk_api):
+def answer_to_user(event, vk_api):
     if detect_intent_text(event.user_id, event.text):
         vk_api.messages.send(user_id=event.user_id,
                              message=detect_intent_text(
@@ -36,4 +36,4 @@ vk_api = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-        echo(event, vk_api)
+        answer_to_user(event, vk_api)

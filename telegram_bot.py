@@ -33,8 +33,8 @@ def help_command(update: Update, context: CallbackContext):
     update.message.reply_text('Help!')
 
 
-def echo(update: Update, context: CallbackContext):
-    """Echo the user message."""
+def answer_to_user(update: Update, context: CallbackContext):
+    """Answer to user with DialogFlow responce"""
     try:
         update.message.reply_text(detect_intent_text(
             update.message.chat_id, update.message.text
@@ -47,6 +47,6 @@ updater = Updater(os.environ['TELEGRAM_TOKEN'])
 dispatcher = updater.dispatcher
 dispatcher.add_handler(CommandHandler("start", start))
 dispatcher.add_handler(CommandHandler("help", help_command))
-dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, answer_to_user))
 updater.start_polling()
 updater.idle()
