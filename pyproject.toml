@@ -2,13 +2,14 @@
 name = "repl_python3_IgraGlagolovBot"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Starcoding <<>>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-python-telegram-bot = "^13.7"
-dialogflow = "^1.1.1"
 vk-api = "^11.9.6"
+dialogflow = "^1.1.1"
+telegram = "^0.0.1"
+python-telegram-bot = "^13.8.1"
 
 [tool.poetry.dev-dependencies]
 

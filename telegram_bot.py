@@ -1,17 +1,7 @@
 import os
-from dialogflow_v2.types import TextInput, QueryInput, SessionsClient
+from dialogflow_script import detect_intent_text
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-
-
-def detect_intent_text(session_id, text):
-    session_client = SessionsClient()
-    session = session_client.session_path(os.environ['PROJECT_ID'], session_id)
-    print(session)
-    text_input = TextInput(text=text, language_code='ru-RU')
-    query_input = QueryInput(text=text_input)
-    response = session_client.detect_intent(query_input=query_input, session=session)
-    return(response.query_result.fulfillment_text)
 
 
 def start(update: Update, context: CallbackContext):

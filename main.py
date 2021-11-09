@@ -1,13 +1,15 @@
 import os
 import random
 import vk_api as vk
+from dialogflow_script import detect_intent_text
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 
 def echo(event, vk_api):
+
     vk_api.messages.send(
         user_id=event.user_id,
-        message=event.text,
+        message=detect_intent_text(event.user_id, event.text),
         random_id=random.randint(1,1000)
     )
 
