@@ -16,8 +16,10 @@ def detect_intent_text(session_id, text):
     text_input = TextInput(text=text, language_code='ru')
     query_input = QueryInput(text=text_input)
     response = session_client.detect_intent(query_input=query_input, session=session)
-    print(response.query_result.intent.is_fallback)
-    return response.query_result.fulfillment_text
+    if not response.query_result.intent.is_fallback:
+        return response.query_result.fulfillment_text
+    else:
+        return False
 
 
 def echo(event, vk_api):

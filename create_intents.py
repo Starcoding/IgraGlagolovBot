@@ -33,5 +33,5 @@ with open('training_phrases.json') as json_file:
     training_phrases = json.load(json_file)
 
 for phrase in training_phrases:
-    create_intent(phrase, training_phrases[phrase]['questions'], training_phrases[phrase]['answer'])
+    create_intent('igraglagolov', phrase, training_phrases[phrase]['questions'], message_texts=training_phrases[phrase]['answer'])
 
