@@ -43,16 +43,10 @@ def echo(update: Update, context: CallbackContext):
         print(f'Problems with DiagFlow: {error}')
 
 
-def main():
-    """Start the bot."""
-    updater = Updater(os.environ['TELEGRAM_TOKEN'])
-    dispatcher = updater.dispatcher
-    dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("help", help_command))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
-    updater.start_polling()
-    updater.idle()
-
-
-if __name__ == '__main__':
-    main()
+updater = Updater(os.environ['TELEGRAM_TOKEN'])
+dispatcher = updater.dispatcher
+dispatcher.add_handler(CommandHandler("start", start))
+dispatcher.add_handler(CommandHandler("help", help_command))
+dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+updater.start_polling()
+updater.idle()
