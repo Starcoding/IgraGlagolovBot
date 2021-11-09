@@ -25,18 +25,20 @@ def help_command(update: Update, context: CallbackContext):
 
 def answer_to_user(update: Update, context: CallbackContext):
     """Answer to user with DialogFlow responce"""
-    try:
-        update.message.reply_text(detect_intent_text(
-            f'tg-{update.message.chat_id}', update.message.text
-        ))
-    except Exception as error:
-        print(f'Problems with DiagFlow: {error}')
+    update.message.reply_text(detect_intent_text(
+        f'tg-{update.message.chat_id}', update.message.text
+    ))
+
+
+def error_handler(update: Update, context: CallbackContext):
+    print(f'Update: {update}.\nError: {context.error}.')
 
 
 updater = Updater(os.environ['TELEGRAM_TOKEN'])
 dispatcher = updater.dispatcher
 dispatcher.add_handler(CommandHandler("start", start))
 dispatcher.add_handler(CommandHandler("help", help_command))
+dispatcher.add_error_handler(error_handler)
 dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, answer_to_user))
 updater.start_polling()
 updater.idle()
