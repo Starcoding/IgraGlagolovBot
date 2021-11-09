@@ -26,8 +26,8 @@ def detect_intent_text(session_id, text):
 def answer_to_user(event, vk_api):
     if detect_intent_text(event.user_id, event.text):
         vk_api.messages.send(user_id=event.user_id,
-                             message=detect_intent_text(
-                                 event.user_id, event.text),
+                             message=detect_intent_text(event.user_id,
+                                                        event.text),
                              random_id=random.randint(1, 1000))
 
 
