@@ -2,3 +2,4 @@ venv
 .env
 igraglagolov-331612-65e2ae8f0b87.json
 __pycache__
+.vscode

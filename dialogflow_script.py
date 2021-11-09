@@ -9,5 +9,6 @@ def detect_intent_text(session_id, text):
     print(session)
     text_input = TextInput(text=text, language_code='ru')
     query_input = QueryInput(text=text_input)
-    response = session_client.detect_intent(query_input=query_input, session=session)
+    response = session_client.detect_intent(query_input=query_input,
+                                            session=session)
     return(response.query_result.fulfillment_text)
