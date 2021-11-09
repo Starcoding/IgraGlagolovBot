@@ -38,13 +38,14 @@ def create_intent(project_id, display_name,
 
 def main():
     with open('training_phrases.json', encoding='utf-8') as json_file:
-        training_phrases = json.load(json_file)
+        training_phrases = dict.items(json.load(json_file))
 
-    for phrase in training_phrases:
+    for display_name, training_phrases_parts in training_phrases:
+        questions, answer = dict.items(training_phrases_parts)
         create_intent(project_id=os.environ['PROJECT_ID'],
-                    display_name=phrase,
-                    training_phrases_parts=training_phrases[phrase]['questions'],
-                    message_texts=[training_phrases[phrase]['answer']])
+                      display_name=display_name,
+                      training_phrases_parts=questions[1],
+                      message_texts=answer[1])
 
 
 if __name__ == '__main__':

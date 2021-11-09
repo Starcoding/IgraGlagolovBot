@@ -4,10 +4,9 @@ from dialogflow_v2 import SessionsClient
 from dialogflow_v2.types import QueryInput, TextInput
 from dotenv import load_dotenv
 
-load_dotenv()
-
 
 def detect_intent_text(session_id, text, platform='other'):
+    load_dotenv()
     session_client = SessionsClient()
     session = session_client.session_path(os.environ['PROJECT_ID'], session_id)
     text_input = TextInput(text=text, language_code='ru')
