@@ -17,6 +17,7 @@ def answer_to_user(event, vk_api):
 
 
 def main():
+    load_dotenv()
     vk_session = vk.VkApi(token=os.environ['VK_API_KEY'])
     vk_api = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
@@ -26,5 +27,4 @@ def main():
 
 
 if __name__ == '__main__':
-    load_dotenv()
     main()
