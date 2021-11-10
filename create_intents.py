@@ -3,8 +3,6 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv()
-
 
 def create_intent(project_id, display_name,
                   training_phrases_parts, message_texts):
@@ -37,6 +35,7 @@ def create_intent(project_id, display_name,
 
 
 def main():
+    load_dotenv()
     with open('training_phrases.json', encoding='utf-8') as json_file:
         training_phrases = dict.items(json.load(json_file))
 

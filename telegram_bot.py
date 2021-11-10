@@ -7,8 +7,6 @@ from telegram.ext import (CallbackContext, CommandHandler, Filters,
 
 from dialogflow_api import detect_intent_text
 
-load_dotenv()
-
 
 def start(update: Update, context: CallbackContext):
     """Send a message when the command /start is issued."""
@@ -35,6 +33,7 @@ def error_handler(update: Update, context: CallbackContext):
 
 
 def main():
+    load_dotenv()
     updater = Updater(os.environ['TELEGRAM_TOKEN'])
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))

@@ -7,8 +7,6 @@ from vk_api.longpoll import VkEventType, VkLongPoll
 
 from dialogflow_api import detect_intent_text
 
-load_dotenv()
-
 
 def answer_to_user(event, vk_api):
     if detect_intent_text(event.user_id, event.text, 'vk'):
@@ -26,4 +24,5 @@ def main():
             answer_to_user(event, vk_api)
 
 if __name__ == '__main__':
+    load_dotenv()
     main()
