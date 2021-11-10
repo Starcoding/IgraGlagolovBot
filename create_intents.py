@@ -37,14 +37,13 @@ def create_intent(project_id, display_name,
 def main():
     load_dotenv()
     with open('training_phrases.json', encoding='utf-8') as json_file:
-        training_phrases = dict.items(json.load(json_file))
+        training_phrases = json.load(json_file)
 
-    for display_name, training_phrases_parts in training_phrases:
-        questions, answer = dict.items(training_phrases_parts)
+    for display_name, training_phrases_parts in training_phrases.items():
         create_intent(project_id=os.environ['PROJECT_ID'],
                       display_name=display_name,
-                      training_phrases_parts=questions[1],
-                      message_texts=answer[1])
+                      training_phrases_parts=training_phrases_parts['questions'],
+                      message_texts=training_phrases_parts['answer'])
 
 
 if __name__ == '__main__':

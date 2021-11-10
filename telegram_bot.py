@@ -23,9 +23,10 @@ def help_command(update: Update, context: CallbackContext):
 
 def answer_to_user(update: Update, context: CallbackContext):
     """Answer to user with DialogFlow responce"""
-    update.message.reply_text(detect_intent_text(
+    _, reply_text = detect_intent_text(
         f'tg-{update.message.chat_id}', update.message.text
-    ))
+    )
+    update.message.reply_text(reply_text)
 
 
 def error_handler(update: Update, context: CallbackContext):
